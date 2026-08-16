@@ -19,4 +19,8 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('users', UserController::class)->names('user');
-});
+    Route::get('/invoice/pdf/{id?}', [UserController::class, 'generatePdf'])->name('invoice.pdf');
+    });
+    
+Route::get('/invoice/csv/{id?}', [UserController::class, 'generateCsv'])->name('invoice.csv');
+Route::get('/invoice/{id}/pdf', [UserController::class, 'generatePdf'])->name('invoice.pdf');   
